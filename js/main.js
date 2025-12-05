@@ -1,23 +1,27 @@
 /**
- * main.js - final integrated version
- * - Defensive profile-duplicate guard (monkey-patch + MutationObserver + cleanup)
- * - Mobile-aware adjustments (disable heavy plugins on touch, adaptive fullHeight)
- * - Debounced scroll handlers, init guard to avoid double-exec
+ * main.js - final integrated & mobile-safe version with robust menu behavior
  *
- * If your profile element uses a different selector, replace PROFILE_SEL below (e.g. '#profile' or '.user-profile').
+ * Features:
+ * - Defensive duplicate-profile guard (cleanup + MutationObserver + append/insert patch)
+ * - Mobile-aware adjustments (disable heavy plugins on touch, adaptive fullHeight)
+ * - rAF-driven scroll handling to avoid layout thrash / repeating elements on mobile
+ * - Improved burger menu: touch/click friendly, body scroll lock, outside-click close, ESC to close, accessible aria toggles
+ * - Debounced expensive tasks, passive scroll listeners
+ *
+ * NOTE: If your profile element uses a different selector, update PROFILE_SEL below (e.g. '#profile' or '.user-profile').
  */
 
 (function () {
-  // ------------ Defensive guard for duplicate profile elements ------------
-  var PROFILE_SEL = ".profile"; // change if your profile selector differs
+  var PROFILE_SEL = ".profile"; // change to match your profile selector
 
+  // --- Init guard: prevent double-execution ---
   if (window.__ftco_main_initialized) {
     console.warn("ftco main already initialized — skipping duplicate init");
     return;
   }
   window.__ftco_main_initialized = true;
 
-  // Debounce helper
+  // --- Utility helpers ---
   function debounce(fn, ms) {
     var t;
     return function () {
@@ -29,8 +33,14 @@
       }, ms);
     };
   }
+  function isTouchDevice() {
+    return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+  }
+  function isSmallScreen() {
+    return window.innerWidth <= 768;
+  }
 
-  // Remove duplicate profiles (keep first)
+  // --- Defensive duplicate-profile protections ---
   function removeDuplicateProfiles() {
     try {
       var nodes = document.querySelectorAll(PROFILE_SEL);
@@ -41,11 +51,9 @@
         console.warn("Removed duplicate profile nodes, kept first.");
       }
     } catch (e) {
-      // ignore errors
+      // ignore
     }
   }
-
-  // Run quick cleanup on key events
   var cleanupDebounced = debounce(removeDuplicateProfiles, 40);
   window.addEventListener("scroll", cleanupDebounced, { passive: true });
   window.addEventListener("resize", cleanupDebounced);
@@ -53,7 +61,6 @@
   document.addEventListener("DOMContentLoaded", removeDuplicateProfiles);
   window.addEventListener("load", removeDuplicateProfiles);
 
-  // MutationObserver to remove duplicated nodes immediately when added
   try {
     var obs = new MutationObserver(function (mutations) {
       var found = false;
@@ -70,17 +77,13 @@
         }
         if (found) break;
       }
-      if (found) {
-        removeDuplicateProfiles();
-      }
+      if (found) removeDuplicateProfiles();
     });
     obs.observe(document.body, { childList: true, subtree: true });
   } catch (e) {
-    // fallback: periodic cleanup
     setInterval(removeDuplicateProfiles, 1000);
   }
 
-  // Monkey-patch appendChild/insertBefore to block insertion of a node containing profile when one already exists
   (function () {
     try {
       var origAppend = Element.prototype.appendChild;
@@ -96,9 +99,7 @@
               return node;
             }
           }
-        } catch (e) {
-          // fall through to original
-        }
+        } catch (e) {}
         return origAppend.call(this, node);
       };
 
@@ -119,40 +120,43 @@
         return origInsert.call(this, newNode, referenceNode);
       };
     } catch (e) {
-      // don't break if patching fails
+      // ignore
     }
   })();
 
-  // ---------- Mobile / device helpers ----------
-  function isTouchDevice() {
-    return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+  // --- Safe reflow for mobile/resize/orientation ---
+  function applyFullHeightBehavior() {
+    if (typeof jQuery === "undefined") return;
+    if (isSmallScreen()) {
+      jQuery(".js-fullheight").css({ height: "auto", "min-height": jQuery(window).height() + "px" });
+      return;
+    }
+    var setHeight = function () {
+      jQuery(".js-fullheight").css("height", jQuery(window).height());
+    };
+    setHeight();
+    jQuery(window).off("resize.ftco_fullheight").on("resize.ftco_fullheight", setHeight);
   }
-  function isSmallScreen() {
-    return window.innerWidth <= 768;
-  }
-
-  // Reusable safe reflow (runs on resize/orientation)
-  function safeReflow() {
+  var reflowDebounced = debounce(function () {
     removeDuplicateProfiles();
     applyFullHeightBehavior();
-  }
+  }, 150);
+  window.addEventListener("orientationchange", reflowDebounced, false);
+  window.addEventListener("resize", reflowDebounced, false);
 
-  // ---------------- Main site logic (wrapped to use jQuery if available) ----------------
-  // Initialize AOS safely (disable on small screens for stability/performance)
+  // --- AOS init (disable on small screens for stability) ---
   if (typeof AOS !== "undefined") {
     try {
-      if (isSmallScreen()) {
-        AOS.init({ disable: true });
-      } else {
-        AOS.init({ duration: 800, easing: "slide" });
-      }
+      if (isSmallScreen()) AOS.init({ disable: true });
+      else AOS.init({ duration: 800, easing: "slide" });
     } catch (e) {}
   }
 
+  // ---------- Main site logic (jQuery-wrapped) ----------
   (function ($) {
     "use strict";
 
-    // Parallax (Stellar.js) - disable on touch devices
+    // Parallax: skip on touch devices
     if ($.fn.stellar && !isTouchDevice()) {
       try {
         $(window).stellar({
@@ -166,64 +170,111 @@
       } catch (e) {}
     }
 
-    // Full height sections - mobile-friendly
-    var applyFullHeightBehavior = function () {
-      if (isSmallScreen()) {
-        $(".js-fullheight").css({
-          height: "auto",
-          "min-height": $(window).height() + "px",
-        });
-        // On mobile we don't continuously rebind heavy resize handlers
-        return;
-      }
-
-      var setHeight = function () {
-        $(".js-fullheight").css("height", $(window).height());
-      };
-
-      setHeight();
-      $(window).off("resize.ftco_fullheight").on("resize.ftco_fullheight", setHeight);
-    };
+    // Full height sections applied initially
     applyFullHeightBehavior();
-
-    // Reflow on orientation / resize
-    var reflowDebounced = debounce(safeReflow, 150);
-    window.addEventListener("orientationchange", reflowDebounced, false);
-    window.addEventListener("resize", reflowDebounced, false);
 
     // Loader
     var loader = function () {
       setTimeout(function () {
         var $loader = $("#ftco-loader");
-        if ($loader.length > 0) {
-          $loader.removeClass("show");
-        }
+        if ($loader.length > 0) $loader.removeClass("show");
       }, 1);
     };
     loader();
 
-    // Scrollax init (avoid on touch devices)
+    // Scrollax init (avoid on touch)
     if (typeof $.Scrollax !== "undefined" && !isTouchDevice()) {
       try {
         $.Scrollax();
       } catch (e) {}
     }
 
-    // Burger Menu (touch-friendly)
+    // --------------- Improved Burger Menu (robust + accessible) ---------------
+    function lockBodyScroll() {
+      // simple body lock: add class and set overflow hidden
+      document.body.classList.add("ftco-menu-open");
+      // inline style fallback
+      document.body.style.overflow = "hidden";
+    }
+    function unlockBodyScroll() {
+      document.body.classList.remove("ftco-menu-open");
+      document.body.style.overflow = "";
+    }
+
+    function closeMenu($toggle, $nav) {
+      if ($toggle && $toggle.length) $toggle.removeClass("active").attr("aria-expanded", "false");
+      if ($nav && $nav.length) $nav.removeClass("show");
+      unlockBodyScroll();
+    }
+
+    function openMenu($toggle, $nav) {
+      if ($toggle && $toggle.length) $toggle.addClass("active").attr("aria-expanded", "true");
+      if ($nav && $nav.length) $nav.addClass("show");
+      lockBodyScroll();
+    }
+
     var burgerMenu = function () {
-      $("body").on("click touchstart", ".js-fh5co-nav-toggle", function (event) {
-        if (event.type === "touchstart") event.preventDefault();
+      var $body = $("body");
+      var $toggle = $(".js-fh5co-nav-toggle");
+      var $nav = $("#ftco-nav");
+
+      // Ensure proper aria attributes
+      $toggle.attr("role", "button");
+      if (!$toggle.attr("aria-expanded")) $toggle.attr("aria-expanded", "false");
+
+      // Toggle on click or touch
+      $body.on("click touchstart", ".js-fh5co-nav-toggle", function (ev) {
+        // prevent double-firing in some browsers
+        if (ev.type === "touchstart") ev.preventDefault();
+        ev.stopPropagation();
+
         var $this = $(this);
-        if ($("#ftco-nav").is(":visible")) {
-          $this.removeClass("active");
+        var isOpen = $this.hasClass("active");
+        if (isOpen) {
+          closeMenu($this, $nav);
         } else {
-          $this.addClass("active");
+          openMenu($this, $nav);
         }
       });
+
+      // Close when clicking a nav link (single page anchor) - good for mobile
+      $body.on("click", "#ftco-nav a[href^='#']", function () {
+        // give the native behavior time on some devices, then close
+        var $t = $toggle;
+        setTimeout(function () {
+          closeMenu($t, $nav);
+        }, 50);
+      });
+
+      // Close on outside click / touch
+      $(document).on("click touchstart", function (e) {
+        // if menu not open, ignore
+        if (!$toggle.hasClass("active")) return;
+        var target = e.target;
+        if ($nav && $nav.length && !$.contains($nav[0], target) && !$.contains($toggle[0], target) && target !== $toggle[0]) {
+          closeMenu($toggle, $nav);
+        }
+      });
+
+      // Close on ESC key
+      $(document).on("keydown", function (e) {
+        if (e.key === "Escape" || e.keyCode === 27) {
+          if ($toggle.hasClass("active")) closeMenu($toggle, $nav);
+        }
+      });
+
+      // Ensure menu state resets on resize/orientation change (avoid stuck open)
+      $(window).on("resize orientationchange", debounce(function () {
+        // if nav is visible but viewport switched to desktop, clear locks
+        if (!isSmallScreen() && $toggle.hasClass("active")) {
+          closeMenu($toggle, $nav);
+        }
+      }, 150));
     };
     burgerMenu();
 
-    // Smooth scrolling for nav links
+    // Smooth scrolling for nav links: prefer native CSS smooth where supported
+    // Add CSS rule in your stylesheet: html { scroll-behavior: smooth; }
     var onePageClick = function () {
       $(document).on("click", '#ftco-nav a[href^="#"]', function (event) {
         event.preventDefault();
@@ -231,13 +282,15 @@
         var target = $($.attr(this, "href"));
         if (!target.length) return;
 
+        // fallback to jQuery animate for older browsers (duration tuned for mobile)
         var dur = isSmallScreen() ? 600 : 500;
+        // Use animate for consistent offset handling
         $("html, body").animate({ scrollTop: target.offset().top - 70 }, dur);
       });
     };
     onePageClick();
 
-    // Hero / home carousel
+    // Hero / home carousel (Owl)
     var carousel = function () {
       if ($.fn.owlCarousel) {
         try {
@@ -258,67 +311,78 @@
     };
     carousel();
 
-    // Navbar dropdown hover (harmless on touch)
-    $("nav .dropdown").hover(
-      function () {
-        var $this = $(this);
-        $this.addClass("show");
-        $this.find("> a").attr("aria-expanded", true);
-        $this.find(".dropdown-menu").addClass("show");
-      },
-      function () {
-        var $this = $(this);
-        $this.removeClass("show");
-        $this.find("> a").attr("aria-expanded", false);
-        $this.find(".dropdown-menu").removeClass("show");
-      }
-    );
+    // Navbar behavior: rAF-driven to avoid layout thrash
+    (function () {
+      var lastScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+      var ticking = false;
+      var state = { scrolled: null, awake: null };
 
-    $("#dropdown04").on("show.bs.dropdown", function () {
-      console.log("show");
-    });
+      function updateNavbarState(scrollY) {
+        var $navbar = $(".ftco_navbar");
+        var sd = $(".js-scroll-wrap");
+        if (!$navbar.length) return;
 
-    // Navbar scroll behavior (debounced). thresholds adapt to screen size
-    var scrollWindow = function () {
-      var $w = $(window),
-        st = $w.scrollTop(),
-        navbar = $(".ftco_navbar"),
-        sd = $(".js-scroll-wrap");
+        var thresh1 = isSmallScreen() ? 80 : 150;
+        var thresh2 = isSmallScreen() ? 160 : 350;
 
-      var thresh1 = isSmallScreen() ? 80 : 150;
-      var thresh2 = isSmallScreen() ? 160 : 350;
+        var shouldScrolled = scrollY > thresh1;
+        var shouldAwake = scrollY > thresh2;
 
-      if (st > thresh1) {
-        if (!navbar.hasClass("scrolled")) navbar.addClass("scrolled");
-      }
-      if (st < thresh1) {
-        if (navbar.hasClass("scrolled")) navbar.removeClass("scrolled sleep");
-      }
-      if (st > thresh2) {
-        if (!navbar.hasClass("awake")) navbar.addClass("awake");
-        if (sd.length > 0) sd.addClass("sleep");
-      }
-      if (st < thresh2) {
-        if (navbar.hasClass("awake")) {
-          navbar.removeClass("awake");
-          navbar.addClass("sleep");
+        if (shouldScrolled !== state.scrolled) {
+          state.scrolled = shouldScrolled;
+          if (shouldScrolled) $navbar.addClass("scrolled");
+          else $navbar.removeClass("scrolled sleep");
         }
-        if (sd.length > 0) sd.removeClass("sleep");
+
+        if (shouldAwake !== state.awake) {
+          state.awake = shouldAwake;
+          if (shouldAwake) {
+            $navbar.addClass("awake");
+            if (sd.length) sd.addClass("sleep");
+          } else {
+            $navbar.removeClass("awake");
+            $navbar.addClass("sleep");
+            if (sd.length) sd.removeClass("sleep");
+          }
+        }
       }
-    };
 
-    $(window).on("scroll", debounce(function () {
-      scrollWindow();
-      // also ensure duplicates removed while scrolling
-      removeDuplicateProfiles();
-    }, 50));
+      var removeDupDuringScroll = debounce(removeDuplicateProfiles, 600);
 
-    // Counter animation (waypoints) - tweak offset for mobile
+      function onScroll() {
+        lastScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        if (!ticking) {
+          window.requestAnimationFrame(function () {
+            try {
+              updateNavbarState(lastScrollY);
+              removeDupDuringScroll();
+            } finally {
+              ticking = false;
+            }
+          });
+          ticking = true;
+        }
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        updateNavbarState(window.pageYOffset || 0);
+      });
+      window.addEventListener("load", function () {
+        updateNavbarState(window.pageYOffset || 0);
+      });
+      window.addEventListener("resize", debounce(function () {
+        state.scrolled = state.awake = null;
+        updateNavbarState(window.pageYOffset || 0);
+      }, 150));
+    })();
+
+    // Counter animation (waypoint)
     var counter = function () {
       if (!$.fn.waypoint || !$.fn.animateNumber) return;
-
-      $("#section-counter, .hero-wrap, .ftco-counter, .ftco-about").waypoint(
-        function (direction) {
+      try {
+        $("#section-counter, .hero-wrap, .ftco-counter, .ftco-about").waypoint(function (direction) {
           if (direction === "down" && !$(this.element).hasClass("ftco-animated")) {
             var commaStep = $.animateNumber.numberStepFactories.separator(",");
             $(".number").each(function () {
@@ -327,19 +391,17 @@
               $this.animateNumber({ number: num, numberStep: commaStep }, 7000);
             });
           }
-        },
-        { offset: isSmallScreen() ? "110%" : "95%" }
-      );
+        }, { offset: isSmallScreen() ? "110%" : "95%" });
+      } catch (e) {}
     };
     counter();
 
-    // Content animations (waypoints)
+    // Content animations (waypoint)
     var contentWayPoint = function () {
       if (!$.fn.waypoint) return;
-
-      var i = 0;
-      $(".ftco-animate").waypoint(
-        function (direction) {
+      try {
+        var i = 0;
+        $(".ftco-animate").waypoint(function (direction) {
           if (direction === "down" && !$(this.element).hasClass("ftco-animated")) {
             i++;
             $(this.element).addClass("item-animate");
@@ -357,9 +419,8 @@
               });
             }, 100);
           }
-        },
-        { offset: isSmallScreen() ? "110%" : "95%" }
-      );
+        }, { offset: isSmallScreen() ? "110%" : "95%" });
+      } catch (e) {}
     };
     contentWayPoint();
 
@@ -388,19 +449,19 @@
       } catch (e) {}
     }
 
-    // On ready / load: ensure single profile and initial UI state
+    // On ready / load: final safety calls
     $(document).ready(function () {
       removeDuplicateProfiles();
-      scrollWindow();
+      applyFullHeightBehavior();
     });
 
     $(window).on("load", function () {
       removeDuplicateProfiles();
       applyFullHeightBehavior();
-      scrollWindow();
     });
   })(jQuery);
 })();
+
 
 
 
