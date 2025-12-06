@@ -334,6 +334,112 @@ if (typeof AOS !== "undefined" && !AOS.__initialized) {
     }
   }
 })(jQuery);
+// --- Mobile scroll-jump fixes: disable scrollspy on touch, block programmatic scroll during user interaction, remove hash ---
+(function ($) {
+  "use strict";
+
+  var isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+
+  // If touch device, disable Bootstrap ScrollSpy if present
+  try {
+    if (isTouch) {
+      // Remove data-spy attribute if present to avoid bootstrap auto behavior
+      $("body").removeAttr("data-spy");
+      // If ScrollSpy has already been initialized, dispose it (Bootstrap 4)
+      if ($.fn.scrollspy) {
+        try {
+          // try dispose if available
+          $('body').scrollspy('dispose');
+        } catch (e) {
+          // fallback: remove any stored scrollspy data
+          $('body').removeData('bs.scrollspy');
+        }
+      }
+    } else {
+      // For non-touch devices, ensure scrollspy is initialized once (optional)
+      if ($.fn.scrollspy && !$('body').data('bs.scrollspy')) {
+        $('body').scrollspy({ target: '.site-navbar-target', offset: 300 });
+      }
+    }
+  } catch (e) {
+    // ignore errors
+  }
+
+  // Track user interaction to avoid programmatic scroll overriding user scroll
+  var userInteracting = false;
+  var interactionTimer = null;
+  function markInteracting() {
+    userInteracting = true;
+    clearTimeout(interactionTimer);
+    interactionTimer = setTimeout(function () {
+      userInteracting = false;
+    }, 250);
+  }
+
+  ['touchstart', 'touchmove', 'wheel'].forEach(function (ev) {
+    window.addEventListener(ev, markInteracting, { passive: true });
+  });
+
+  // Safe scroll function: won't run if user interacting
+  function safeScrollTo(y, duration) {
+    if (userInteracting) return false;
+    // stop any in-progress animations
+    $("html, body").stop(true);
+    $("html, body").animate({ scrollTop: y }, duration || 500);
+    return true;
+  }
+
+  // Replace your nav click handler (or add on top of it) to use safeScrollTo + remove hash
+  $(document).off("click", '#ftco-nav a[href^="#"]');
+  $(document).on("click", '#ftco-nav a[href^="#"]', function (e) {
+    e && e.preventDefault();
+    var href = $.attr(this, "href");
+    if (!href || href === "#") return;
+    var $target = $(href);
+    if (!$target.length) return;
+
+    var targetY = Math.max($target.offset().top - 70, 0);
+    var didScroll = safeScrollTo(targetY, 500);
+
+    // If we successfully scrolled programmatically, remove the hash so browser won't auto-jump later
+    if (didScroll && history && history.replaceState) {
+      try {
+        history.replaceState(null, "", window.location.pathname + window.location.search);
+      } catch (err) { /* ignore */ }
+    } else {
+      // If we did not do programmatic scroll (user interacting), let the browser handle native scroll
+      // but still remove hash after a short delay to avoid later jumps
+      setTimeout(function () {
+        if (history && history.replaceState) {
+          try { history.replaceState(null, "", window.location.pathname + window.location.search); } catch (err) {}
+        }
+      }, 1000);
+    }
+
+    // close bootstrap collapse (mobile) if open
+    var $navCollapse = $("#ftco-nav.collapse");
+    if ($navCollapse.length && $navCollapse.hasClass("show")) {
+      try { $navCollapse.collapse('hide'); } catch (err) { $navCollapse.removeClass('show'); }
+      $(".js-fh5co-nav-toggle").removeClass("active");
+    }
+  });
+
+  // Remove any existing URL hash on page load (best-effort) to prevent :target jumps
+  $(function () {
+    if (window.location.hash) {
+      var id = window.location.hash.replace('#','');
+      if (document.getElementById(id) && history && history.replaceState) {
+        try { history.replaceState(null, "", window.location.pathname + window.location.search); } catch (err) {}
+      }
+    }
+  });
+
+  // Stop any running scroll animations if the user interacts (prevents auto-snap)
+  ['touchstart', 'touchmove', 'wheel', 'keydown'].forEach(function(ev) {
+    window.addEventListener(ev, function () { $("html, body").stop(true, true); }, { passive: true });
+  });
+
+})(jQuery);
 
 
 
