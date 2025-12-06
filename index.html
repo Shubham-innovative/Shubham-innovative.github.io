@@ -1,135 +1,451 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Shubham Suryavanshi Portfolio</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css" />
     <link rel="stylesheet" href="css/animate.css" />
+
     <link rel="stylesheet" href="css/owl.carousel.min.css" />
     <link rel="stylesheet" href="css/owl.theme.default.min.css" />
     <link rel="stylesheet" href="css/magnific-popup.css" />
+
     <link rel="stylesheet" href="css/aos.css" />
+
     <link rel="stylesheet" href="css/ionicons.min.css" />
+
     <link rel="stylesheet" href="css/flaticon.css" />
     <link rel="stylesheet" href="css/icomoon.css" />
     <link rel="stylesheet" href="css/style.css" />
+
+
+    <style>
+      /*======================================
+      //--//-->   ABOUT
+      ======================================*/
+
+      .about-mf .box-shadow-full {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+
+      .about-mf .about-img {
+        margin-bottom: 2rem;
+      }
+
+      .about-mf .about-img img {
+        margin-left: 10px;
+      }
+
+      .skill-mf .progress {
+        /* background-color: #cde1f8; */
+        margin: 0.5rem 0 1.2rem 0;
+        border-radius: 0;
+        height: 0.7rem;
+      }
+
+      .skill-mf .progress .progress-bar {
+        height: 0.7rem;
+        background-color: #ffbd39;
+      }
+
+      /* Animation styles */
+      #typing-animation {
+        position: relative;
+        font-size: 30px;
+        font-weight: bold;
+        color: rgb(255, 255, 255);
+        overflow: hidden;
+        white-space: nowrap;
+        animation: typing 3s steps(20, end) infinite;
+      }
+
+      #typing-animation:before {
+        content: "";
+        /* position: absolute; */
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background-color: #ccc;
+        animation: typing-cursor 0.5s ease-in-out infinite;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes typing-cursor {
+        from {
+          width: 5px;
+        }
+        to {
+          width: 0;
+        }
+      }
+
+      /* project image zoom effect */
+
+      .zoom-effect {
+        overflow: hidden;
+        transition: transform 0.3s ease-out;
+      }
+
+      .zoom-effect:hover {
+        transform: scale(1.1);
+      }
+    </style>
   </head>
-
-  <body class="site-body">
-
-    <!-- Early anti-jump guard -->
-    <script>
-      (function () {
-        try {
-          if (window.location && window.location.hash && history && history.replaceState) {
-            history.replaceState(null, "", window.location.pathname + window.location.search);
-          }
-        } catch (e) {}
-        try {
-          var afElems = document.querySelectorAll('[autofocus]');
-          for (var i = 0; i < afElems.length; i++) {
-            try { afElems[i].removeAttribute('autofocus'); } catch (err) {}
-          }
-        } catch (e) {}
-      })();
-    </script>
-
-    <!-- NAV -->
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+    <nav
+      class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target"
+      id="ftco-navbar"
+    >
       <div class="container">
-        <a class="navbar-brand" href="index.html">Excel | SQL | Python | Power BI | Alteryx-Core | SAP-Data Analyst</a>
-        <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="index.html"
+          >Excel | SQL | Python | Power BI | Alteryx-Core | SAP-Data Analyst</a
+        >
+        <button
+          class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle"
+          type="button"
+          data-toggle="collapse"
+          data-target="#ftco-nav"
+          aria-controls="ftco-nav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span class="oi oi-menu"></span> Menu
         </button>
 
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav nav ml-auto">
-            <li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
-            <li class="nav-item"><a href="#resume-section" class="nav-link"><span>Resume</span></a></li>
-            <li class="nav-item"><a href="#project-section" class="nav-link"><span>Projects</span></a></li>
-            <li class="nav-item"><a href="#Achivements-section" class="nav-link"><span>Achivements</span></a></li>
-            <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
+            <li class="nav-item">
+              <a href="#about-section" class="nav-link"><span>About</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="#resume-section" class="nav-link"><span>Resume</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="#project-section" class="nav-link"
+                ><span>Projects</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="#Achivements-section" class="nav-link"
+                ><span>Achivements</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="#contact-section" class="nav-link"
+                ><span>Contact</span></a
+              >
+            </li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <!-- HERO SECTION (unchanged except safe fallback) -->
+    <!-- HERO SECTION -->
     <section id="hero" class="hero">
       <div class="home-slider owl-carousel">
         <div class="slider-item">
           <div class="overlay"></div>
           <div class="container">
-            <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
-              <div class="one-third js-fullheight order-md-last img" style="background-image: url('images/hero-bg.jpg')">
+            <div
+              class="row d-md-flex no-gutters slider-text align-items-end justify-content-end"
+              data-scrollax-parent="true"
+            >
+              <div
+                class="one-third js-fullheight order-md-last img"
+                style="background-image: url('images/.jpg')"
+              >
                 <div class="overlay"></div>
               </div>
-              <div class="one-forth d-flex align-items-center ftco-animate">
+              <div
+                class="one-forth d-flex align-items-center ftco-animate"
+                data-scrollax=" properties: { translateY: '70%' }"
+              >
                 <div class="text">
                   <span class="subheading">Hello!</span>
-                  <h1 class="mb-4 mt-3">This is <span>Shubham Suryavanshi</span></h1>
-                  <span id="typing-animation" aria-hidden="true"></span>
-                  <br /><br />
+                  <h1 class="mb-4 mt-3">
+                    This is <span>Shubham Suryavanshi</span>
+                  </h1>
+
+                  <!-- Element to contain animated typing -->
+                  <span id="typing-animation"></span>
+
+                  <script>
+                    // Initialize the typing animation
+                    const typingAnimationElement =
+                      document.getElementById("typing-animation");
+
+                    // Create an array of typing text
+                    const typingTexts = [
+                      "Creative  ",
+                      "Analytical  ",
+                      "Collaborative   ",
+                    ];
+
+                    // Create a function to display the typing animation for a given text
+                    function playTypingAnimation(text) {
+                      // Loop through each character and add it to the element
+                      for (let i = 0; i < text.length; i++) {
+                        setTimeout(() => {
+                          typingAnimationElement.textContent += text[i];
+                        }, i * 200); // Increase the delay to slow down the typing animation
+                      }
+
+                      // Once the animation is complete, reset the text and start over
+                      setTimeout(() => {
+                        typingAnimationElement.textContent = "";
+                        playTypingAnimation(
+                          typingTexts[
+                            (typingTexts.indexOf(text) + 1) %
+                              typingTexts.length
+                          ]
+                        );
+                      }, text.length * 200);
+                    }
+
+                    // Start the typing animation loop
+                    playTypingAnimation(typingTexts[0]);
+                  </script>
+
+                  <br />
+                  <br />
                   <h2>FP&A / Data-Business Analyst/ Financial Analyst</h2>
                   <p>
-                    <a href="https://www.linkedin.com/in/shubhamsuryavanshi4220/" class="btn btn-primary py-3 px-4">LinkedIn</a>
-                    <a href="https://www.instagram.com/shubham.s.4/" class="btn btn-white btn-outline-white py-3 px-4">instagram</a>
+                    <a
+                      href="https://www.linkedin.com/in/shubhamsuryavanshi4220/"
+                      class="btn btn-primary py-3 px-4"
+                      >LinkedIn</a
+                    >
+                    <a
+                      href="https://www.instagram.com/shubham.s.4/profilecard/?igsh=ejBvODV4Z3k3YWs2"
+                      class="btn btn-white btn-outline-white py-3 px-4"
+                      >instagram</a
+                    >
                   </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div><!-- .home-slider -->
+      </div>
     </section>
 
-    <!-- ABOUT SECTION (FIXED: single profile image, removed duplicated overlaying images) -->
-    <section class="ftco-about img ftco-section ftco-no-pb" id="about-section">
+    <!-- ABOUT SECTION -->
+    <section
+      class="ftco-about img ftco-section ftco-no-pb"
+      id="about-section"
+    >
       <div class="container">
-        <div class="row d-flex align-items-stretch">
-          <!-- Profile column -->
-          <div class="col-md-6 col-lg-5 d-flex">
-            <div class="img-about img d-flex align-items-stretch">
-              <!-- Only ONE image element here to avoid duplication on scroll -->
-              <div class="about-img" style="width:100%; display:flex; align-items:center; justify-content:center; padding:20px;">
-                <img src="images/about-me.png" id="profile-photo" class="img-fluid rounded b-shadow-a" alt="Shubham Suryavanshi" />
-              </div>
+        <div class="row">
+          <div class="row d-flex align-items-stretch">
+            <div class="col-md-6 col-lg-5 d-flex">
+              <div class="img-about img d-flex align-items-stretch">
+                <div class="overlay">
+                  <div class="row">
+                    <div class="col-sm-6 col-md-5">
+                      <div class="about-img">
+                        <img
+                          src="images/about-me.png"
+                          class="img-fluid rounded b-shadow-a"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                    <!-- Details next to profile image -->
+                    <div class="col-sm-6 col-md-7">
+                      <div class="about-info">
+                        <p>
+                          <span class="title-s">Name: </span>
+                          <span>Shubham Suryavanshi</span>
+                        </p>
+                        <p>
+                          <span class="title-s">Job Role: </span>
+                          <span>FP&A / Financial Analyst Intern</span>
+                        </p>
+                        <p>
+                          <span class="title-s">Experience: </span>
+                          <span>Intern At UFI Filters Group (June 2025-December 2025
+                            )</span>
+                        </p>
+                        <p>
+                          <span class="title-s">Address: </span>
+                          <span>Belgaum Karnataka, India</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
 
-              <!-- About details stacked next to the profile img on larger screens -->
-              <div class="about-info" style="padding: 18px;">
-                <p><span class="title-s">Name: </span><span>Shubham Suryavanshi</span></p>
-                <p><span class="title-s">Job Role: </span><span>FP&A / Financial Analyst Intern</span></p>
-                <p><span class="title-s">Experience: </span><span>Intern At UFI Filters Group (June 2025 - Dec 2025)</span></p>
-                <p><span class="title-s">Address: </span><span>Belgaum / Bengaluru, Karnataka, India</span></p>
+                  <div class="skill-mf">
+                    <p class="title-s">Skills</p>
+                    <span>Excel</span>
+                    <span class="pull-right">80%</span>
+                    <div class="progress">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: 80%"
+                        aria-valuenow="80"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+
+                    <span>SQL</span>
+                    <span class="pull-right">70%</span>
+                    <div class="progress">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: 70%"
+                        aria-valuenow="70"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+
+                    <span>Python</span>
+                    <span class="pull-right">70%</span>
+                    <div class="progress">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: 70%"
+                        aria-valuenow="70"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+
+                    <span>Statistical Analysis</span>
+                    <span class="pull-right">60%</span>
+                    <div class="progress">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: 60%"
+                        aria-valuenow="60"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+
+                    <span>Data Visualization</span>
+                    <span class="pull-right">80%</span>
+                    <div class="progress">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: 80%"
+                        aria-valuenow="80"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- About text column -->
-          <div class="col-md-6 col-lg-7 pl-lg-5 pb-5">
-            <div class="row justify-content-start pb-3">
-              <div class="col-md-12 heading-section ftco-animate">
-                <h1 class="big">About</h1>
-                <h2 class="mb-4">About Me</h2>
-                <p>Motivated MBA scholar passionate about transforming data into actionable insights. Eager to apply analytical skills and strategic thinking to drive business success as a Data Analyst... (keep the rest)</p>
+            <div class="col-md-6 col-lg-7 pl-lg-5 pb-5">
+              <div class="row justify-content-start pb-3">
+                <div class="col-md-12 heading-section ftco-animate">
+                  <h1 class="big">About</h1>
+                  <h2 class="mb-4">About Me</h2>
 
-                <ul class="about-info mt-4 px-md-0 px-2">
-                  <li class="d-flex"><span>Profile:</span><span>FP&A & Financial Analytics</span></li>
-                  <li class="d-flex"><span>Domain:</span><span>Financial Planning & Analysis (FP&A) ...</span></li>
-                  <li class="d-flex"><span>Education:</span><span>MBA (Finance), BCA</span></li>
-                  <li class="d-flex"><span>BI Tools:</span><span>SAP Analytics Cloud, Power BI, OAC, Excel, Anaplan, Alteryx</span></li>
-                  <li class="d-flex"><span>Interest:</span><span>Financial Markets, Data Science, BI, ESG</span></li>
-                </ul>
+                  <p>
+                    Motivated MBA scholar passionate about transforming data
+                    into actionable insights. Eager to apply analytical skills
+                    and strategic thinking to drive business success as a Data
+                    Analyst. Experienced in data analysis and visualization,
+                    with a strong commitment to teamwork and delivering
+                    meaningful results. Ready to contribute to innovative
+                    solutions that foster organizational growth.
+                  </p>
+                  <ul class="about-info mt-4 px-md-0 px-2">
+                    <li class="d-flex">
+                      <span>Profile:</span>
+                      <span>FP&A &amp; Financial Analytics & Financial Transformation</span>
+                    </li>
+                    <li class="d-flex">
+                      <span>Domain:</span>
+                      <span
+                        >Financial Planning & Analysis (FP&A),
+                        Data Analytics & Business Intelligence, SAP Analytics Cloud (SAC) Projects, Oracle Cloud & Data Science Projects, Corporate Finance & Valuation 
+                        </span
+                      >
+                    </li>
+                    <li class="d-flex">
+                      <span>Education:</span>
+                      <span
+                        >Master of Business Administration (MBA-Finance) &amp; Bachelor
+                        of Computer Applications (BCA)</span
+                      >
+                    <li class="d-flex">
+                      <span>BI Tools:</span>
+                      <span>
+                      SAP Analytics Cloud (SAC) – Planning + Predictive + Stories <br>
+                      Oracle Analytics Cloud (OAC) – Enterprise Analytics + ML <br>
+                      Power BI – Financial Dashboards + DAX <br>
+                      Excel (Advanced) – Pivot, Power Query, Forecasting <br>
+                      Anaplan (Level 1 Model Builder) – Modules, Dashboards, Planning Models <br>
+                      Alteryx Designer (Core) – ETL Workflows, Automation, Data Preparation
+                      </span>
+                    </li>
+
+                    <li class="d-flex">
+                      <span>Other Skills:</span>
+                      <span
+                        >FP&A capabilities — Budgeting, Forecasting, Variance Analysis, Scenario Modeling, Rolling Forecast and Financial Insights</span
+
+                    </li>
+                    <li class="d-flex">
+                      <span>Interest:</span>
+                      <span
+                        >📈 Financial Markets & Corporate Finance<br>
+                         🤖 Data Science & Machine Learning<br>
+                         📊 Business Intelligence & Analytics<br>
+                         🌱 ESG & Sustainability Analytics<br>
+                        </span
+                      >
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
 
-            <div class="counter-wrap ftco-animate d-flex mt-md-3">
-              <div class="text">
-                <p class="mb-4"><span class="number" data-number="6">0</span>+ &nbsp; Projects completed</p>
-                <p><a href="https://www.linkedin.com/in/shubhamsuryavanshi4220/" class="btn btn-primary py-3 px-3">LinkedIn</a></p>
+              <div class="counter-wrap ftco-animate d-flex mt-md-3">
+                <div class="text">
+                  <p class="mb-4">
+                    <span class="number" data-number="6">0</span>
+                    <span>+</span>
+                    <span>&nbsp; Projects completed</span>
+                  </p>
+                  <p>
+                    <a
+                      href="https://www.linkedin.com/in/shubhamsuryavanshi4220/"
+                      class="btn btn-primary py-3 px-3"
+                      >LinkedIn</a
+                    >
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -1100,14 +1416,31 @@
       </div>
     </footer>
 
+    <!-- loader -->
     <div id="ftco-loader" class="show fullscreen">
       <svg class="circular" width="48px" height="48px">
-        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+        <circle
+          class="path-bg"
+          cx="24"
+          cy="24"
+          r="22"
+          fill="none"
+          stroke-width="4"
+          stroke="#eeeeee"
+        />
+        <circle
+          class="path"
+          cx="24"
+          cy="24"
+          r="22"
+          fill="none"
+          stroke-width="4"
+          stroke-miterlimit="10"
+          stroke="#F96D00"
+        />
       </svg>
     </div>
 
-    <!-- VENDOR SCRIPTS - keep order -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -1121,7 +1454,7 @@
     <script src="js/jquery.animateNumber.min.js"></script>
     <script src="js/scrollax.min.js"></script>
 
-    <!-- YOUR SAFE main.js -->
     <script src="js/main.js"></script>
   </body>
 </html>
+
