@@ -366,3 +366,97 @@ if (typeof AOS !== "undefined" && !AOS.__initialized) {
   } catch (e) {}
 
 })(jQuery);
+
+
+/* ---------- Strong guard: block programmatic jumps & hash auto-jump ---------- */
+(function () {
+  "use strict";
+
+  // If your file already defines userInteracting, reuse it; otherwise create a local guard
+  if (typeof window.__userInteracting === "undefined") {
+    window.__userInteracting = false;
+    (["touchstart","touchmove","wheel","keydown"]).forEach(function(ev){
+      window.addEventListener(ev, function () {
+        window.__userInteracting = true;
+        clearTimeout(window.__userInteractingTimer);
+        window.__userInteractingTimer = setTimeout(function () { window.__userInteracting = false; }, 250);
+      }, { passive: true });
+    });
+  }
+
+  // Helper to check interaction
+  function isUserInteracting() {
+    return !!window.__userInteracting;
+  }
+
+  // 1) Patch window.scrollTo
+  try {
+    var _origScrollTo = window.scrollTo.bind(window);
+    window.scrollTo = function (x, y) {
+      if (isUserInteracting()) {
+        console.warn("Blocked window.scrollTo while user interacting.");
+        return;
+      }
+      return _origScrollTo(x, y);
+    };
+  } catch (e) {
+    // ignore if can't override
+  }
+
+  // 2) Patch Element.prototype.scrollIntoView
+  try {
+    var _origScrollIntoView = Element.prototype.scrollIntoView;
+    Element.prototype.scrollIntoView = function (arg) {
+      if (isUserInteracting()) {
+        console.warn("Blocked scrollIntoView on element:", this);
+        return;
+      }
+      try { return _origScrollIntoView.call(this, arg); } catch (e) {}
+    };
+  } catch (e) {}
+
+  // 3) Patch jQuery animate to ignore scrollTop/scrollLeft animations when user interacting
+  try {
+    if (window.jQuery && jQuery && jQuery.fn && !jQuery.fn.__patched_for_scroll_block) {
+      jQuery.fn.__patched_for_scroll_block = true;
+      var _origAnimate = jQuery.fn.animate;
+      jQuery.fn.animate = function (props) {
+        // detect attempts to animate scrollTop/scrollLeft on html/body or any element
+        try {
+          var isScrollingAnim = props && (props.scrollTop !== undefined || props.scrollLeft !== undefined);
+          if (isScrollingAnim && isUserInteracting()) {
+            console.warn("Blocked jQuery animate scroll while user interacting.", props);
+            return this; // no-op chainable
+          }
+        } catch (e) {}
+        return _origAnimate.apply(this, arguments);
+      };
+    }
+  } catch (e) {}
+
+  // 4) Clear hash if some script sets it — remove :target jumps
+  try {
+    window.addEventListener("hashchange", function (ev) {
+      if (history && history.replaceState) {
+        try {
+          history.replaceState(null, "", window.location.pathname + window.location.search);
+          console.warn("Cleared location.hash to prevent auto-jump.");
+        } catch (e) {}
+      }
+    }, { passive: true });
+  } catch (e) {}
+
+  // 5) Extra: observe DOM for unexpected focus changes that might scroll
+  try {
+    var focusObserver = new MutationObserver(function () {
+      // if some node gets autofocus attribute injected, remove it
+      var af = document.querySelector("[autofocus]");
+      if (af && isUserInteracting()) {
+        try { af.removeAttribute("autofocus"); console.warn("Removed injected autofocus during interaction."); } catch (e) {}
+      }
+    });
+    focusObserver.observe(document.documentElement || document.body, { attributes: true, subtree: true, attributeFilter: ["autofocus"] });
+  } catch (e) {}
+
+})();
+
