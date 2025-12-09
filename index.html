@@ -28,7 +28,6 @@
     <link rel="stylesheet" href="css/icomoon.css" />
     <link rel="stylesheet" href="css/style.css" />
 
-
     <style>
       /*======================================
       //--//-->   ABOUT
@@ -72,7 +71,6 @@
 
       #typing-animation:before {
         content: "";
-        /* position: absolute; */
         top: 0;
         left: 0;
         width: 0;
@@ -109,6 +107,70 @@
       .zoom-effect:hover {
         transform: scale(1.1);
       }
+
+      /* ---------- Global responsiveness helpers ---------- */
+
+      /* Make all images scale properly on small screens */
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* Mobile-first tweaks */
+      @media (max-width: 991.98px) {
+        /* Navbar brand: shorter & wrapped on mobile */
+        .navbar-brand {
+          font-size: 13px;
+          white-space: normal;
+          line-height: 1.3;
+          max-width: 200px;
+        }
+
+        .hero .text h1 {
+          font-size: 28px;
+          line-height: 1.3;
+        }
+
+        .hero .text h2 {
+          font-size: 16px;
+        }
+
+        #typing-animation {
+          font-size: 18px;
+        }
+
+        .ftco-about .img-about {
+          margin-bottom: 1.5rem;
+        }
+
+        .about-mf .box-shadow-full {
+          padding-top: 2rem;
+          padding-bottom: 2rem;
+        }
+
+        .ftco-section {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+
+        .blog-entry .text {
+          padding: 0.75rem 0;
+        }
+
+        .heading-section .big,
+        .heading-section .big-2,
+        .big-4 {
+          font-size: 60px;
+        }
+      }
+
+      /* Desktop+: keep hero full height */
+      @media (min-width: 992px) {
+        #hero,
+        #hero .slider-item {
+          min-height: 100vh;
+        }
+      }
     </style>
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -117,9 +179,14 @@
       id="ftco-navbar"
     >
       <div class="container">
-        <a class="navbar-brand" href="index.html"
-          >Excel | SQL | Python | Power BI | Alteryx-Core | SAP-Data Analyst</a
-        >
+        <a class="navbar-brand" href="index.html">
+          <span class="d-none d-lg-inline">
+            Excel | SQL | Python | Power BI | Alteryx-Core | SAP-Data Analyst
+          </span>
+          <span class="d-inline d-lg-none">
+            Shubham – Data & FP&A
+          </span>
+        </a>
         <button
           class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle"
           type="button"
@@ -178,7 +245,7 @@
               </div>
               <div
                 class="one-forth d-flex align-items-center ftco-animate"
-                data-scrollax=" properties: { translateY: '70%' }"
+                data-scrollax=" properties: { translateY: '50%' }"
               >
                 <div class="text">
                   <span class="subheading">Hello!</span>
@@ -283,8 +350,10 @@
                         </p>
                         <p>
                           <span class="title-s">Experience: </span>
-                          <span>Intern At UFI Filters Group (June 2025-December 2025
-                            )</span>
+                          <span
+                            >Intern At UFI Filters Group (June 2025-December
+                            2025)</span
+                          >
                         </p>
                         <p>
                           <span class="title-s">Address: </span>
@@ -383,49 +452,60 @@
                   <ul class="about-info mt-4 px-md-0 px-2">
                     <li class="d-flex">
                       <span>Profile:</span>
-                      <span>FP&A &amp; Financial Analytics & Financial Transformation</span>
+                      <span
+                        >FP&A &amp; Financial Analytics & Financial
+                        Transformation</span
+                      >
                     </li>
                     <li class="d-flex">
                       <span>Domain:</span>
                       <span
-                        >Financial Planning & Analysis (FP&A),
-                        Data Analytics & Business Intelligence, SAP Analytics Cloud (SAC) Projects, Oracle Cloud & Data Science Projects, Corporate Finance & Valuation 
-                        </span
-                      >
+                        >Financial Planning & Analysis (FP&A), Data Analytics &
+                        Business Intelligence, SAP Analytics Cloud (SAC)
+                        Projects, Oracle Cloud & Data Science Projects, Corporate
+                        Finance & Valuation
+                      </span>
                     </li>
                     <li class="d-flex">
                       <span>Education:</span>
                       <span
-                        >Master of Business Administration (MBA-Finance) &amp; Bachelor
-                        of Computer Applications (BCA)</span
+                        >Master of Business Administration (MBA-Finance) &amp;
+                        Bachelor of Computer Applications (BCA)</span
                       >
+                    </li>
                     <li class="d-flex">
                       <span>BI Tools:</span>
                       <span>
-                      SAP Analytics Cloud (SAC) – Planning + Predictive + Stories <br>
-                      Oracle Analytics Cloud (OAC) – Enterprise Analytics + ML <br>
-                      Power BI – Financial Dashboards + DAX <br>
-                      Excel (Advanced) – Pivot, Power Query, Forecasting <br>
-                      Anaplan (Level 1 Model Builder) – Modules, Dashboards, Planning Models <br>
-                      Alteryx Designer (Core) – ETL Workflows, Automation, Data Preparation
+                        SAP Analytics Cloud (SAC) – Planning + Predictive +
+                        Stories <br />
+                        Oracle Analytics Cloud (OAC) – Enterprise Analytics +
+                        ML <br />
+                        Power BI – Financial Dashboards + DAX <br />
+                        Excel (Advanced) – Pivot, Power Query, Forecasting
+                        <br />
+                        Anaplan (Level 1 Model Builder) – Modules, Dashboards,
+                        Planning Models <br />
+                        Alteryx Designer (Core) – ETL Workflows, Automation,
+                        Data Preparation
                       </span>
                     </li>
 
                     <li class="d-flex">
                       <span>Other Skills:</span>
                       <span
-                        >FP&A capabilities — Budgeting, Forecasting, Variance Analysis, Scenario Modeling, Rolling Forecast and Financial Insights</span
-
+                        >FP&A capabilities — Budgeting, Forecasting, Variance
+                        Analysis, Scenario Modeling, Rolling Forecast and
+                        Financial Insights</span
+                      >
                     </li>
                     <li class="d-flex">
                       <span>Interest:</span>
                       <span
-                        >📈 Financial Markets & Corporate Finance<br>
-                         🤖 Data Science & Machine Learning<br>
-                         📊 Business Intelligence & Analytics<br>
-                         🌱 ESG & Sustainability Analytics<br>
-                        </span
-                      >
+                        >📈 Financial Markets & Corporate Finance<br />
+                        🤖 Data Science & Machine Learning<br />
+                        📊 Business Intelligence & Analytics<br />
+                        🌱 ESG & Sustainability Analytics<br />
+                      </span>
                     </li>
                   </ul>
                 </div>
@@ -453,15 +533,19 @@
       </div>
     </section>
 
-    <!-- Learning SECTION -->
-    <section class="ftco-section ftco-no-pb" id="Learning-section">
+    <!-- Learning / RESUME SECTION -->
+    <section class="ftco-section ftco-no-pb" id="resume-section">
       <div class="container">
         <div class="row justify-content-center pb-5">
           <div class="col-md-10 heading-section text-center ftco-animate">
             <h1 class="big big-2">Learning & Experience</h1>
             <h2 class="mb-4">Learning & Experience</h2>
             <p>
-              Motivated FP&A and Analytics professional with strong skills in financial modeling, forecasting, and business intelligence. Committed to continuous learning and building expertise in enterprise planning tools, cloud technologies, and performance management.
+              Motivated FP&A and Analytics professional with strong skills in
+              financial modeling, forecasting, and business intelligence.
+              Committed to continuous learning and building expertise in
+              enterprise planning tools, cloud technologies, and performance
+              management.
             </p>
           </div>
         </div>
@@ -471,42 +555,60 @@
           <div class="underline"></div>
         </div>
         <br />
-        
+
         <div class="row">
           <div class="col-md-6">
             <div class="resume-wrap ftco-animate">
-              
               <span class="date">June–December 2025 / Intern</span>
 
-            <!-- Job Title + Logo -->
-            <h2 style="display:flex; align-items:center; gap:12px;">
+              <!-- Job Title + Logo -->
+              <h2 style="display: flex; align-items: center; gap: 12px">
+                <!-- Logo Icon -->
+                <img
+                  src="images/ufi_logo.jpg"
+                  alt="UFI Logo"
+                  style="
+                    width: 55px;
+                    height: 55px;
+                    object-fit: contain;
+                    border-radius: 8px;
+                  "
+                />
 
-            <!-- Logo Icon -->
-            <img src="images/ufi_logo.jpg" alt="UFI Logo"
-            style="width: 55px; height:55px; object-fit:contain; border-radius:8px;">
+                Financial Analyst Intern
+              </h2>
 
-    Financial Analyst Intern
-  </h2>
-
-  <span class="position">UFI FILTERS INDIA PVT. LIMITED</span>
+              <span class="position">UFI FILTERS INDIA PVT. LIMITED</span>
               <p class="mt-4">
-                FP&A Skills: Financial Modeling, Driver-Based Forecasting, Budgeting, Variance Analysis, Scenario Planning, KPI Reporting, Monthly Close Support, and BI Reporting (Excel & Power BI)
+                FP&A Skills: Financial Modeling, Driver-Based Forecasting,
+                Budgeting, Variance Analysis, Scenario Planning, KPI Reporting,
+                Monthly Close Support, and BI Reporting (Excel & Power BI)
               </p>
               <ul>
                 <li>
-                  Cleaned, validated, and standardized large financial datasets (revenue, cost, product-level) using Excel and Python to support accurate FP&A reporting and financial modeling.
+                  Cleaned, validated, and standardized large financial datasets
+                  (revenue, cost, product-level) using Excel and Python to
+                  support accurate FP&A reporting and financial modeling.
                 </li>
                 <li>
-                  Performed trend & variance analysis, driver-based analysis, and cost/margin insights, supporting budgeting, forecasting, and scenario planning activities.
+                  Performed trend & variance analysis, driver-based analysis,
+                  and cost/margin insights, supporting budgeting, forecasting,
+                  and scenario planning activities.
                 </li>
                 <li>
-                  Built KPI dashboards, performance scorecards, and monthly management reports in Excel and Power BI for leadership decision-making.
+                  Built KPI dashboards, performance scorecards, and monthly
+                  management reports in Excel and Power BI for leadership
+                  decision-making.
                 </li>
                 <li>
-                  Developed P&L, OPEX, cost-center, and variance tracking templates to streamline monthly close and recurring reporting cycles.
+                  Developed P&L, OPEX, cost-center, and variance tracking
+                  templates to streamline monthly close and recurring reporting
+                  cycles.
                 </li>
                 <li>
-                  Improved workflow efficiency by designing structured reporting sheets, automation-ready templates, and multi-step quality checks, collaborating with cross-functional teams.
+                  Improved workflow efficiency by designing structured reporting
+                  sheets, automation-ready templates, and multi-step quality
+                  checks, collaborating with cross-functional teams.
                 </li>
               </ul>
             </div>
@@ -678,8 +780,8 @@
             <h1 class="big big-2">Projects</h1>
             <h2 class="mb-4">Projects</h2>
             <p>
-              Below are the sample Finance-Data Analytics projects on SQL, Python, Power
-              BI &amp; ML.
+              Below are the sample Finance-Data Analytics projects on SQL,
+              Python, Power BI &amp; ML.
             </p>
           </div>
         </div>
@@ -696,21 +798,26 @@
                 <h3 class="heading">
                   <a
                     href="https://github.com/Shubham-innovative/SQL-Music-Store-Analysis"
-                    >Global FP&A Reporting & Variance Analysis Automation Suite (GFVAAS)</a
+                    >Global FP&A Reporting & Variance Analysis Automation Suite
+                    (GFVAAS)</a
                   >
                 </h3>
                 <p>
-                  > Ability to collect & transform operational data (SQL/Excel/Python)<br>
+                  &gt; Ability to collect &amp; transform operational data
+                  (SQL/Excel/Python)<br />
 
-                  > Variance analysis (YoY, MoM, Budget vs Actual)<br>
+                  &gt; Variance analysis (YoY, MoM, Budget vs Actual)<br />
 
-                  > Financial forecasting & AOP support<br>
+                  &gt; Financial forecasting &amp; AOP support<br />
 
-                  > Multi-region reporting (Country → Region → Global consolidation)<br>
-                  > Storytelling using dashboards<br>
+                  &gt; Multi-region reporting (Country → Region → Global
+                  consolidation)<br />
+                  &gt; Storytelling using dashboards<br />
 
-                  > Ad-hoc analysis engine (drilldown into products, services)<br>
-                  > Automation thinking like SAP/Oracle/Business Objects systems
+                  &gt; Ad-hoc analysis engine (drilldown into products,
+                  services)<br />
+                  &gt; Automation thinking like SAP/Oracle/Business Objects
+                  systems
                 </p>
               </div>
             </div>
@@ -727,15 +834,19 @@
                 <h3 class="heading">
                   <a
                     href="https://github.com/Shubham-innovative/Python_Diwali_Sales_Analysis"
-                    >Digital Finance Cockpit with Alteryx + Power BI for SAP ERP Data</a
+                    >Digital Finance Cockpit with Alteryx + Power BI for SAP ERP
+                    Data</a
                   >
                 </h3>
                 <p>
-                  > Simulate data extraction from SAP, clean via Alteryx workflows, and visualize with Power BI.<br>
+                  &gt; Simulate data extraction from SAP, clean via Alteryx
+                  workflows, and visualize with Power BI.<br />
 
-                  > KPIs: Working capital, margin bridge, cost centers, and forecast accuracy.<br>
+                  &gt; KPIs: Working capital, margin bridge, cost centers, and
+                  forecast accuracy.<br />
 
-                  > Add variance alerts and predictive modeling using historical trends.<br>
+                  &gt; Add variance alerts and predictive modeling using
+                  historical trends.<br />
                 </p>
               </div>
             </div>
@@ -752,22 +863,26 @@
                 <h3 class="heading">
                   <a
                     href="https://github.com/Shubham-innovative/Madhav_Store_PowerBI_Dashboard"
-                    >Global P&L Variance Tracker with KPI Driver Trees & Headcount Forecasting</a
+                    >Global P&amp;L Variance Tracker with KPI Driver Trees &amp;
+                    Headcount Forecasting</a
                   >
                 </h3>
                 <p>
-                  > Create an Excel + Power BI dashboard that dynamically breaks down P&L line variances into operational KPIs (like delivery time, product returns, headcount cost, etc.)<br>
+                  &gt; Create an Excel + Power BI dashboard that dynamically
+                  breaks down P&amp;L line variances into operational KPIs (like
+                  delivery time, product returns, headcount cost, etc.)<br />
 
-                  > Add headcount forecasting logic using productivity ratios per region/team.<br>
+                  &gt; Add headcount forecasting logic using productivity ratios
+                  per region/team.<br />
 
-                  > Use VBA or Python for report automation.<br>
+                  &gt; Use VBA or Python for report automation.<br />
                 </p>
               </div>
             </div>
           </div>
         </div>
         <br />
-        <!-- added justify-content-center to center align the last two projects -->
+        <!-- added justify-content-center to center align the last project row -->
         <div class="row d-flex justify-content-center">
           <div class="col-md-4 d-flex ftco-animate">
             <div class="blog-entry justify-content-end">
@@ -781,17 +896,22 @@
                 <h3 class="heading">
                   <a
                     href="https://github.com/Shubham-innovative/sales_forecasting"
-                    >End-to-End Automated FP&A Suite with Scenario Planning for a Hypergrowth SaaS Business</a
+                    >End-to-End Automated FP&A Suite with Scenario Planning for
+                    a Hypergrowth SaaS Business</a
                   >
                 </h3>
                 <p>
-                  > Build a financial model that integrates revenue from subscriptions, usage-based pricing, and customer churn.<br>
+                  &gt; Build a financial model that integrates revenue from
+                  subscriptions, usage-based pricing, and customer churn.<br />
 
-                  > Add scenario planning (Best/Base/Worst) with driver-based forecasting.<br>  
+                  &gt; Add scenario planning (Best/Base/Worst) with driver-based
+                  forecasting.<br />
 
-                  > Integrate Power BI dashboards to visualize monthly performance vs budget and variance drivers.<br>
+                  &gt; Integrate Power BI dashboards to visualize monthly
+                  performance vs budget and variance drivers.<br />
 
-                  > Bonus: Include a Python script to auto-pull mock ERP data and feed it into Excel models.
+                  &gt; Bonus: Include a Python script to auto-pull mock ERP data
+                  and feed it into Excel models.
                 </p>
               </div>
             </div>
@@ -807,7 +927,9 @@
     >
       <div class="container">
         <div class="row d-md-flex align-items-center">
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+          <div
+            class="col-md d-flex justify-content-center counter-wrap ftco-animate"
+          >
             <div class="block-18">
               <div class="text">
                 <strong class="number" data-number="24">0</strong>
@@ -815,7 +937,9 @@
               </div>
             </div>
           </div>
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+          <div
+            class="col-md d-flex justify-content-center counter-wrap ftco-animate"
+          >
             <div class="block-18">
               <div class="text">
                 <strong class="number" data-number="4">0</strong>
@@ -823,7 +947,9 @@
               </div>
             </div>
           </div>
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+          <div
+            class="col-md d-flex justify-content-center counter-wrap ftco-animate"
+          >
             <div class="block-18">
               <div class="text">
                 <strong class="number" data-number="10">0</strong>
@@ -831,7 +957,9 @@
               </div>
             </div>
           </div>
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+          <div
+            class="col-md d-flex justify-content-center counter-wrap ftco-animate"
+          >
             <div class="block-18">
               <div class="text">
                 <strong class="number" data-number="500">0</strong>
@@ -867,436 +995,499 @@
         </div>
       </div>
     </section>
-</section>
-     <!-- Certifications SECTION -->
-    <section class="ftco-section" id="Certifications -section">
+
+    <!-- Certifications SECTION -->
+    <section class="ftco-section" id="certifications-section">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
           <div class="col-md-7 heading-section text-center ftco-animate">
-            <h1 class="big big-2">Industry-Recognized Certifications </h1>
+            <h1 class="big big-2">Industry-Recognized Certifications</h1>
             <h2 class="mb-4">Industry-Recognized Certifications</h2>
             <p>
-              Certified across major analytics and planning platforms—including Oracle Cloud, SAP Analytics Cloud, Alteryx, and Anaplan—I bring a strong blend of cloud expertise, data modeling, and financial planning skills.
+              Certified across major analytics and planning platforms—including
+              Oracle Cloud, SAP Analytics Cloud, Alteryx, and Anaplan—I bring a
+              strong blend of cloud expertise, data modeling, and financial
+              planning skills.
             </p>
           </div>
         </div>
         <div class="row d-flex">
+          <!-- SAP Analytics Cloud Certification -->
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="text mt-3 float-right d-block">
+              <h3 class="heading">
+                <a
+                  href="https://www.credly.com/badges/110abdfe-9ad6-4c3a-aafb-65c400c2419c/linked_in_profile"
+                  target="_blank"
+                >
+                  SAP Certified Associate – Data Analyst (SAP Analytics Cloud)
+                </a>
+              </h3>
 
-  <!-- SAP Analytics Cloud Certification -->
-<div class="col-md-4 d-flex ftco-animate">
-  <div class="text mt-3 float-right d-block">
-    <h3 class="heading">
-      <a href="https://www.credly.com/badges/110abdfe-9ad6-4c3a-aafb-65c400c2419c/linked_in_profile" target="_blank">
-        SAP Certified Associate – Data Analyst (SAP Analytics Cloud)
-      </a>
-    </h3>
+              <div class="blog-entry justify-content-end">
+                <a
+                  href="https://www.credly.com/badges/110abdfe-9ad6-4c3a-aafb-65c400c2419c/linked_in_profile"
+                  target="_blank"
+                  class="block-20 zoom-effect"
+                  style="background-image: url('images/SAP_1.jpg')"
+                >
+                </a>
 
-    <div class="blog-entry justify-content-end">
-      <a href="https://www.credly.com/badges/110abdfe-9ad6-4c3a-aafb-65c400c2419c/linked_in_profile"
-         target="_blank"
-         class="block-20 zoom-effect"
-         style="background-image: url('images/SAP_1.jpg')">
-      </a>
+                <p>Issued: Nov 12, 2025 · Expires: Nov 13, 2026</p>
+                <p>
+                  Skills: SAC Reporting · Data Modeling · Visualization ·
+                  Stories &amp; Dashboards · Planning · Predictive Capabilities
+                </p>
 
-      <p>Issued: Nov 12, 2025 · Expires: Nov 13, 2026</p>
-      <p>Skills: SAC Reporting · Data Modeling · Visualization · Stories & Dashboards · Planning · Predictive Capabilities</p>
+                <a
+                  href="https://www.credly.com/badges/110abdfe-9ad6-4c3a-aafb-65c400c2419c/linked_in_profile"
+                  target="_blank"
+                  class="btn btn-primary py-2 px-3"
+                  >Verify</a
+                >
+              </div>
+            </div>
+          </div>
 
-      <a href="https://www.credly.com/badges/110abdfe-9ad6-4c3a-aafb-65c400c2419c/linked_in_profile"
-         target="_blank"
-         class="btn btn-primary py-2 px-3">Verify</a>
-    </div>
-  </div>
-</div>
-      <!-- SAP Analytics Cloud Certification -->
-<div class="col-md-4 d-flex ftco-animate">
-  <div class="text mt-3 float-right d-block">
-    <h3 class="heading">
-      <a href="https://www.credly.com/badges/3efcf2d7-342a-460f-8be3-695ca7119784/linked_in_profile" target="_blank">
-        SAP Certified Associate - SAP S/4HANA Cloud Private Edition, Management Accounting
-      </a>
-    </h3>
+          <!-- Oracle Analytics Cloud 2025 – Certified Professional -->
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="text mt-3 float-right d-block">
+              <h3 class="heading">
+                <a
+                  href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=E0F04405C4B8C1AEED5DF4548F314B14C3BCA03C59556F9732A6A57541F05A97"
+                  target="_blank"
+                >
+                  Oracle Analytics Cloud 2025 – Certified Professional
+                </a>
+              </h3>
 
-    <div class="blog-entry justify-content-end">
-      <a href="https://www.credly.com/badges/3efcf2d7-342a-460f-8be3-695ca7119784/linked_in_profile"
-         target="_blank"
-         class="block-20 zoom-effect"
-         style="background-image: url('images/SAP_2.jpg')">
-      </a>
+              <div class="blog-entry justify-content-end">
+                <a
+                  href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=E0F04405C4B8C1AEED5DF4548F314B14C3BCA03C59556F9732A6A57541F05A97"
+                  target="_blank"
+                  class="block-20 zoom-effect"
+                  style="background-image: url('images/OCIEA25OCP.png')"
+                >
+                </a>
 
-      <p>Issued:  December, 2025 · Expires: December, 2026</p>
-      <p>Skills: Cost Center Accounting (CCA) & Overhead Control · Profit Center Accounting (PCA) & Performance Reporting · Product Costing & Manufacturing Cost Analysis (CO-PC) · Internal Orders & Project Cost Management · Planning, Budgeting & Forecasting in SAP CO · Management Reporting & Variance Analysis</p>
+                <p>Issued: Oct 28, 2025 · Expires: Oct 28, 2027</p>
+                <p>
+                  Skills: Provisioning · Data Modeling · Self-Service Analytics
+                  · ML Insights · Performance Optimization · BI Publisher
+                </p>
 
-      <a href="https://https://www.credly.com/badges/3efcf2d7-342a-460f-8be3-695ca7119784/linked_in_profile"
-         target="_blank"
-         class="btn btn-primary py-2 px-3">Verify</a>
-    </div>
-  </div>
-</div>
-<!-- Oracle Analytics Cloud 2025 – Certified Professional -->
-<div class="col-md-4 d-flex ftco-animate">
-  <div class="text mt-3 float-right d-block">
-    <h3 class="heading">
-      <a href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=E0F04405C4B8C1AEED5DF4548F314B14C3BCA03C59556F9732A6A57541F05A97" target="_blank">
-        Oracle Analytics Cloud 2025 – Certified Professional
-      </a>
-    </h3>
+                <a
+                  href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=E0F04405C4B8C1AEED5DF4548F314B14C3BCA03C59556F9732A6A57541F05A97"
+                  target="_blank"
+                  class="btn btn-primary py-2 px-3"
+                  >Verify</a
+                >
+              </div>
+            </div>
+          </div>
 
-    <div class="blog-entry justify-content-end">
-      <a href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=E0F04405C4B8C1AEED5DF4548F314B14C3BCA03C59556F9732A6A57541F05A97"
-         target="_blank"
-         class="block-20 zoom-effect"
-         style="background-image: url('images/OCIEA25OCP.png')">
-      </a>
+          <!-- OCI 2025 – Data Science Professional -->
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="text mt-3 float-right d-block">
+              <h3 class="heading">
+                <a
+                  href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C9C386F82734006D7B3F990D706CA41D5172674F6B0C68E36DF61699DAD62646"
+                  target="_blank"
+                >
+                  Oracle Cloud Infrastructure 2025 – Data Science Professional
+                </a>
+              </h3>
 
-      <p>Issued: Oct 28, 2025 · Expires: Oct 28, 2027</p>
-      <p>Skills: Provisioning · Data Modeling · Self-Service Analytics · ML Insights · Performance Optimization · BI Publisher</p>
+              <div class="blog-entry justify-content-end">
+                <a
+                  href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C9C386F82734006D7B3F990D706CA41D5172674F6B0C68E36DF61699DAD62646"
+                  target="_blank"
+                  class="block-20 zoom-effect"
+                  style="background-image: url('images/Data Science_1.png')"
+                >
+                </a>
 
-      <a href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=E0F04405C4B8C1AEED5DF4548F314B14C3BCA03C59556F9732A6A57541F05A97"
-         target="_blank"
-         class="btn btn-primary py-2 px-3">Verify</a>
-    </div>
-  </div>
-</div>
+                <p>Issued: Oct 17, 2025 · Expires: Oct 17, 2027</p>
+                <p>
+                  Skills: Feature Engineering · Model Training · Deployment ·
+                  Monitoring · Scaling · ML Best Practices
+                </p>
 
-  <!-- OCI 2025 – Data Science Professional -->
-<div class="col-md-4 d-flex ftco-animate">
-  <div class="text mt-3 float-right d-block">
-    <h3 class="heading">
-      <a href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C9C386F82734006D7B3F990D706CA41D5172674F6B0C68E36DF61699DAD62646K" target="_blank">
-        Oracle Cloud Infrastructure 2025 – Data Science Professional
-      </a>
-    </h3>
+                <a
+                  href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C9C386F82734006D7B3F990D706CA41D5172674F6B0C68E36DF61699DAD62646"
+                  target="_blank"
+                  class="btn btn-primary py-2 px-3"
+                  >Verify</a
+                >
+              </div>
+            </div>
+          </div>
 
-    <div class="blog-entry justify-content-end">
-      <a href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C9C386F82734006D7B3F990D706CA41D5172674F6B0C68E36DF61699DAD62646"
-         target="_blank"
-         class="block-20 zoom-effect"
-         style="background-image: url('images/Data\ Science_1.png')">
-      </a>
+          <!-- OCI 2025 – Generative AI Professional -->
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="text mt-3 float-right d-block">
+              <h3 class="heading">
+                <a
+                  href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=9E1B7B1AEFFACC819387A8A387877A86CBCC2A8E27A67E63C10F20BB31CAD5D8"
+                  target="_blank"
+                >
+                  Oracle Cloud Infrastructure 2025 – Generative AI Professional
+                </a>
+              </h3>
 
-      <p>Issued: Oct 17, 2025 · Expires: Oct 17, 2027</p>
-      <p>Skills: Feature Engineering · Model Training · Deployment · Monitoring · Scaling · ML Best Practices</p>
+              <div class="blog-entry justify-content-end">
+                <a
+                  href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=9E1B7B1AEFFACC819387A8A387877A86CBCC2A8E27A67E63C10F20BB31CAD5D8"
+                  target="_blank"
+                  class="block-20 zoom-effect"
+                  style="background-image: url('images/Gen_AI.png')"
+                >
+                </a>
 
-      <a href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C9C386F82734006D7B3F990D706CA41D5172674F6B0C68E36DF61699DAD62646"
-         target="_blank"
-         class="btn btn-primary py-2 px-3">Verify</a>
-    </div>
-  </div>
-</div>
-<!-- OCI 2025 – Generative AI Professional -->
-<div class="col-md-4 d-flex ftco-animate">
-  <div class="text mt-3 float-right d-block">
-    <h3 class="heading">
-      <a href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=9E1B7B1AEFFACC819387A8A387877A86CBCC2A8E27A67E63C10F20BB31CAD5D8" target="_blank">
-        Oracle Cloud Infrastructure 2025 – Generative AI Professional
-      </a>
-    </h3>
+                <p>Issued: Oct 30, 2025 · Expires: Oct 30, 2027</p>
+                <p>
+                  Skills: LLMs · Prompt Engineering · RAG · Vector DBs ·
+                  LangChain · GenAI Deployment · AI Ethics
+                </p>
 
-    <div class="blog-entry justify-content-end">
-      <a href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=9E1B7B1AEFFACC819387A8A387877A86CBCC2A8E27A67E63C10F20BB31CAD5D8"
-         target="_blank"
-         class="block-20 zoom-effect"
-         style="background-image: url('images/Gen_AI.png')">
-      </a>
+                <a
+                  href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=9E1B7B1AEFFACC819387A8A387877A86CBCC2A8E27A67E63C10F20BB31CAD5D8"
+                  target="_blank"
+                  class="btn btn-primary py-2 px-3"
+                  >Verify</a
+                >
+              </div>
+            </div>
+          </div>
 
-      <p>Issued: Oct 30, 2025 · Expires: Oct 30, 2027</p>
-      <p>Skills: LLMs · Prompt Engineering · RAG · Vector DBs · LangChain · GenAI Deployment · AI Ethics</p>
+          <!-- Alteryx Designer Core Certification -->
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="text mt-3 float-right d-block">
+              <h3 class="heading">
+                <a
+                  href="https://www.credly.com/badges/e4670cdc-170e-46fb-86b3-5df56f3bbe58/linked_in_profile"
+                  target="_blank"
+                >
+                  Alteryx Designer Core Certification
+                </a>
+              </h3>
 
-      <a href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=9E1B7B1AEFFACC819387A8A387877A86CBCC2A8E27A67E63C10F20BB31CAD5D8"
-         target="_blank"
-         class="btn btn-primary py-2 px-3">Verify</a>
-    </div>
-  </div>
-</div>
+              <div class="blog-entry justify-content-end">
+                <a
+                  href="https://www.credly.com/badges/e4670cdc-170e-46fb-86b3-5df56f3bbe58/linked_in_profile"
+                  target="_blank"
+                  class="block-20 zoom-effect"
+                  style="background-image: url('images/Alteryx_image.jpg')"
+                >
+                </a>
 
-<!-- Alteryx Designer Core Certification -->
-<div class="col-md-4 d-flex ftco-animate">
-  <div class="text mt-3 float-right d-block">
-    <h3 class="heading">
-      <a href="https://www.credly.com/badges/e4670cdc-170e-46fb-86b3-5df56f3bbe58/linked_in_profile" target="_blank">
-        Alteryx Designer Core Certification
-      </a>
-    </h3>
+                <p>Issued: Nov 2025 · Expires: Nov 2027</p>
+                <p>
+                  Skills: Data Prep · Cleaning · Blending · ETL · Workflow
+                  Building
+                </p>
 
-    <div class="blog-entry justify-content-end">
-      <a href="https://www.credly.com/badges/e4670cdc-170e-46fb-86b3-5df56f3bbe58/linked_in_profile"
-         target="_blank"
-         class="block-20 zoom-effect"
-         style="background-image: url('images/Alteryx_image.jpg')">
-      </a>
+                <a
+                  href="https://www.credly.com/badges/e4670cdc-170e-46fb-86b3-5df56f3bbe58/linked_in_profile"
+                  target="_blank"
+                  class="btn btn-primary py-2 px-3"
+                  >Verify</a
+                >
+              </div>
+            </div>
+          </div>
 
-      <p>Issued: Nov 2025 · Expires: Nov 2027</p>
-      <p>Skills: Data Prep · Cleaning · Blending · ETL · Workflow Building</p>
+          <!-- Anaplan Level 1 Model Builder -->
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="text mt-3 float-right d-block">
+              <h3 class="heading">
+                <a href="https://learning.anaplan.com" target="_blank">
+                  Anaplan Level 1 – Model Builder
+                </a>
+              </h3>
 
-      <a href="https://www.credly.com/badges/e4670cdc-170e-46fb-86b3-5df56f3bbe58/linked_in_profile"
-         target="_blank"
-         class="btn btn-primary py-2 px-3">Verify</a>
-    </div>
-  </div>
-</div>
-<!-- Anaplan Level 1 Model Builder -->
-<div class="col-md-4 d-flex ftco-animate">
-  <div class="text mt-3 float-right d-block">
-    <h3 class="heading">
-      <a href="https://learning.anaplan.com" target="_blank">
-        Anaplan Level 1 – Model Builder
-      </a>
-    </h3>
+              <div class="blog-entry justify-content-end">
+                <a
+                  href="https://learning.anaplan.com"
+                  target="_blank"
+                  class="block-20 zoom-effect"
+                  style="background-image: url('images/Anaplan_L1.jpg')"
+                >
+                </a>
 
-    <div class="blog-entry justify-content-end">
-      <a href="https://learning.anaplan.com"
-         target="_blank"
-         class="block-20 zoom-effect"
-         style="background-image: url('images/Anaplan_L1.jpg')">
-      </a>
+                <p>Issued: 11/21/2025</p>
+                <p>
+                  Skills: Model Building · Lists · Line Items · Modules ·
+                  Dashboards
+                </p>
 
-      <p>Issued: 11/21/2025</p>
-      <p>Skills: Model Building · Lists · Line Items · Modules · Dashboards</p>
+                <a
+                  href="https://learning.anaplan.com"
+                  target="_blank"
+                  class="btn btn-primary py-2 px-3"
+                  >Verify</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <a href="https://learning.anaplan.com"
-         target="_blank"
-         class="btn btn-primary py-2 px-3">Verify</a>
-    </div>
-  </div>
-</div>
     <!-- ACHIEVEMENTS SECTION -->
-<section class="ftco-section" id="Achivements-section">
-  <div class="container">
-    <!-- Professional Achievements -->
-    <div class="row justify-content-center mb-5 pb-5">
-      <div class="col-md-7 heading-section text-center ftco-animate">
-        <h1 class="big big-2">Professional Achievements</h1>
-        <h2 class="mb-4">Professional Achievements</h2>
-        <p>
-          BNI (Business Network International) – Developed strong business networking,
-          communication, and collaboration skills through interactions with
-          entrepreneurs and business leaders.
-        </p>
-      </div>
-    </div>
-
-    <div class="row d-flex">
-      <!-- BNI Card -->
-      <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
-          <a
-            href="#"
-            class="block-20 zoom-effect"
-            style="background-image: url('images/Bni_1.jpg')"
-          ></a>
-          <a
-            href="#"
-            class="block-20 zoom-effect"
-            style="background-image: url('images/Bni_2.jpg')"
-          ></a>
-
-          <div class="text mt-3 float-right d-block">
-            <h3 class="heading">
-              <a href="#">BNI – Business Networking International Experience (2024–2025)</a>
-            </h3>
+    <section class="ftco-section" id="Achivements-section">
+      <div class="container">
+        <!-- Professional Achievements -->
+        <div class="row justify-content-center mb-5 pb-5">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h1 class="big big-2">Professional Achievements</h1>
+            <h2 class="mb-4">Professional Achievements</h2>
             <p>
-              • Participated in structured networking sessions with entrepreneurs and
-              business leaders, strengthening communication, confidence, and professional presence.<br />
-              • Built meaningful connections and exchanged referrals, gaining insights
-              into real-world business models, collaboration, and growth mindset.<br />
-              • Learned the importance of mutual value creation — growing by helping
-              others succeed through knowledge sharing and support.
+              BNI (Business Network International) – Developed strong business
+              networking, communication, and collaboration skills through
+              interactions with entrepreneurs and business leaders.
             </p>
           </div>
         </div>
-      </div>
 
-      <!-- ESG–FP&A Research Card -->
-      <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
-          <a
-            href="#"
-            class="block-20 zoom-effect"
-            style="background-image: url('images/ESG_1.jpg')"
-          ></a>
+        <div class="row d-flex">
+          <!-- BNI Card -->
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="blog-entry justify-content-end">
+              <a
+                href="#"
+                class="block-20 zoom-effect"
+                style="background-image: url('images/Bni_1.jpg')"
+              ></a>
+              <a
+                href="#"
+                class="block-20 zoom-effect"
+                style="background-image: url('images/Bni_2.jpg')"
+              ></a>
 
-          <div class="text mt-3 float-right d-block">
-            <h3 class="heading">
-              <a href="#">
-                ESG-Integrated FP&A Research (Upcoming Publication – Jan–Feb 2026)
-              </a>
-            </h3>
+              <div class="text mt-3 float-right d-block">
+                <h3 class="heading">
+                  <a href="#"
+                    >BNI – Business Networking International Experience
+                    (2024–2025)</a
+                  >
+                </h3>
+                <p>
+                  • Participated in structured networking sessions with
+                  entrepreneurs and business leaders, strengthening
+                  communication, confidence, and professional presence.<br />
+                  • Built meaningful connections and exchanged referrals,
+                  gaining insights into real-world business models,
+                  collaboration, and growth mindset.<br />
+                  • Learned the importance of mutual value creation — growing by
+                  helping others succeed through knowledge sharing and support.
+                </p>
+              </div>
+            </div>
+          </div>
 
-            <p>
-              <strong>Title:</strong> Integrating ESG Metrics into FP&A:
-              A Sustainability-Driven Approach to Financial Forecasting Accuracy and Planning.
-            </p>
-            <p>
-              Developed an ESG-integrated FP&A framework using UFI Filters as a case study,
-              showing how renewable energy, safety, and governance initiatives can improve
-              cost forecast accuracy (MAPE, WAPE, RMSE) and strengthen sustainability-driven
-              financial planning.
-            </p>
-            <p><em>Status: Paper completed, publication expected Jan–Feb 2026.</em></p>
+          <!-- ESG–FP&A Research Card -->
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="blog-entry justify-content-end">
+              <a
+                href="#"
+                class="block-20 zoom-effect"
+                style="background-image: url('images/ESG_1.jpg')"
+              ></a>
+
+              <div class="text mt-3 float-right d-block">
+                <h3 class="heading">
+                  <a href="#">
+                    ESG-Integrated FP&A Research (Upcoming Publication – Jan–Feb
+                    2026)
+                  </a>
+                </h3>
+
+                <p>
+                  <strong>Title:</strong> Integrating ESG Metrics into FP&A: A
+                  Sustainability-Driven Approach to Financial Forecasting
+                  Accuracy and Planning.
+                </p>
+                <p>
+                  Developed an ESG-integrated FP&A framework using UFI Filters as
+                  a case study, showing how renewable energy, safety, and
+                  governance initiatives can improve cost forecast accuracy
+                  (MAPE, WAPE, RMSE) and strengthen sustainability-driven
+                  financial planning.
+                </p>
+                <p>
+                  <em
+                    >Status: Paper completed, publication expected Jan–Feb
+                    2026.</em
+                  >
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Event Achievements -->
-    <div class="row justify-content-center mb-5 pb-3">
-      <div class="col-md-7 heading-section text-center ftco-animate">
-        <p>
-          I am a results-oriented leader with experience managing large-scale events.
-          As Event Head for Extravaganzaa 5.0 in 2024, I successfully oversaw the
-          participation of 180 students across 18 teams.
-        </p>
-      </div>
-    </div>
-
-    <div class="row d-flex">
-      <!-- Extravaganza / Jumanji Cards -->
-      <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
-          <a
-            href="#"
-            class="block-20 zoom-effect"
-            style="background-image: url('images/jumanji_2.jpg')"
-          ></a>
-          <a
-            href="#"
-            class="block-20 zoom-effect"
-            style="background-image: url('images/jumanji_1.jpg')"
-          ></a>
-          <div class="text mt-3 float-right d-block">
-            <h3 class="heading">
-              <a href="#">Jain College Of MCA And MBA</a>
-            </h3>
+        <!-- Event Achievements -->
+        <div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate">
             <p>
-              Event Head/Organizer for the college event Extravaganzaa 5.0 (2024),
-              handling around 18 college teams, each team with 10 members.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
-          <a
-            href="#"
-            class="block-20 zoom-effect"
-            style="background-image: url('images/jumanji_3.jpg')"
-          ></a>
-          <a
-            href="#"
-            class="block-20 zoom-effect"
-            style="background-image: url('images/jumanji_4.jpg')"
-          ></a>
-          <div class="text mt-3 float-right d-block">
-            <h3 class="heading">
-              <a href="#">
-                Event in the heart of the jungle was an exhilarating experience!
-              </a>
-            </h3>
-            <p>
-              Extravaganza 5.0, a thrilling jungle treasure hunt! I led 18 college
-              teams with my mentors, Dr. Prasad Kapileshwari, Amit Sir, and Abhishek
-              Desai, to a nail-biting finish. Team Jumanji emerged victorious! (2024)
+              I am a results-oriented leader with experience managing
+              large-scale events. As Event Head for Extravaganzaa 5.0 in 2024,
+              I successfully oversaw the participation of 180 students across 18
+              teams.
             </p>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry">
-          <a
-            href="#"
-            class="block-20 zoom-effect"
-            style="background-image: url('images/jumanji_5.jpg')"
-          ></a>
-          <a
-            href="#"
-            class="block-20 zoom-effect"
-            style="background-image: url('images/jumanji_6.jpg')"
-          ></a>
-          <div class="text mt-3 float-right d-block">
-            <h3 class="heading">
-              <a href="#">Jumanji: Welcome to the Jungle</a>
-            </h3>
+        <div class="row d-flex">
+          <!-- Extravaganza / Jumanji Cards -->
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="blog-entry justify-content-end">
+              <a
+                href="#"
+                class="block-20 zoom-effect"
+                style="background-image: url('images/jumanji_2.jpg')"
+              ></a>
+              <a
+                href="#"
+                class="block-20 zoom-effect"
+                style="background-image: url('images/jumanji_1.jpg')"
+              ></a>
+              <div class="text mt-3 float-right d-block">
+                <h3 class="heading">
+                  <a href="#">Jain College Of MCA And MBA</a>
+                </h3>
+                <p>
+                  Event Head/Organizer for the college event Extravaganzaa 5.0
+                  (2024), handling around 18 college teams, each team with 10
+                  members.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="blog-entry justify-content-end">
+              <a
+                href="#"
+                class="block-20 zoom-effect"
+                style="background-image: url('images/jumanji_3.jpg')"
+              ></a>
+              <a
+                href="#"
+                class="block-20 zoom-effect"
+                style="background-image: url('images/jumanji_4.jpg')"
+              ></a>
+              <div class="text mt-3 float-right d-block">
+                <h3 class="heading">
+                  <a href="#">
+                    Event in the heart of the jungle was an exhilarating
+                    experience!
+                  </a>
+                </h3>
+                <p>
+                  Extravaganza 5.0, a thrilling jungle treasure hunt! I led 18
+                  college teams with my mentors, Dr. Prasad Kapileshwari, Amit
+                  Sir, and Abhishek Desai, to a nail-biting finish. Team Jumanji
+                  emerged victorious! (2024)
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="blog-entry">
+              <a
+                href="#"
+                class="block-20 zoom-effect"
+                style="background-image: url('images/jumanji_5.jpg')"
+              ></a>
+              <a
+                href="#"
+                class="block-20 zoom-effect"
+                style="background-image: url('images/jumanji_6.jpg')"
+              ></a>
+              <div class="text mt-3 float-right d-block">
+                <h3 class="heading">
+                  <a href="#">Jumanji: Welcome to the Jungle</a>
+                </h3>
+                <p>
+                  The invaluable guidance from Dr. Prasad Kapileshwari and the
+                  unforgettable experiences in the jungle will forever inspire
+                  my future endeavors. 🏆🌳
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sports Achievements Intro -->
+        <br />
+        <div class="row justify-content-center mb-3">
+          <div class="col-md-10 heading-section text-center ftco-animate">
             <p>
-              The invaluable guidance from Dr. Prasad Kapileshwari and the
-              unforgettable experiences in the jungle will forever inspire my
-              future endeavors. 🏆🌳
+              I am a dedicated and disciplined sports enthusiast with experience
+              competing in high-level university and league tournaments. As a
+              university table tennis player, I contributed to securing 3rd
+              place in the RCU Single Zone Tournament and demonstrated strong
+              team performance throughout the season. I also achieved major
+              victories, including winning the Jain Premier League 2024 and the
+              Jain Premier League 2025, reflecting consistency, teamwork, and
+              competitive excellence.
             </p>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Sports Achievements Intro -->
-    <br />
-    <div class="row justify-content-center mb-3">
-      <div class="col-md-10 heading-section text-center ftco-animate">
-        <p>
-          I am a dedicated and disciplined sports enthusiast with experience
-          competing in high-level university and league tournaments. As a
-          university table tennis player, I contributed to securing 3rd place in
-          the RCU Single Zone Tournament and demonstrated strong team performance
-          throughout the season. I also achieved major victories, including
-          winning the Jain Premier League 2024 and the Jain Premier League 2025,
-          reflecting consistency, teamwork, and competitive excellence.
-        </p>
-      </div>
-    </div>
+        <!-- Sports Cards: Table Tennis + JPL -->
+        <div class="row d-flex justify-content-center">
+          <!-- Table Tennis Card -->
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="blog-entry justify-content-end">
+              <a
+                href="#"
+                class="block-20 zoom-effect"
+                style="background-image: url('images/table_1.jpg')"
+              ></a>
+              <div class="text mt-3 float-right d-block">
+                <h3 class="heading">
+                  <a href="#">University 🏓 Table Tennis Player</a>
+                </h3>
+                <p>
+                  Table Tennis Tournament Success! Our team secured 3rd place at
+                  the competitive RCU Single Zone Table Tennis Tournament.
+                  Facing strong competition, we were incredibly proud of our
+                  performance. Thanks to SSS Samiti Mahaveer Mirji College and
+                  RCU University for hosting. #tabletennis #RCU #Belgaum
+                </p>
+              </div>
+            </div>
+          </div>
 
-    <!-- Sports Cards: Table Tennis + JPL -->
-    <div class="row d-flex justify-content-center">
-      <!-- Table Tennis Card -->
-      <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
-          <a
-            href="#"
-            class="block-20 zoom-effect"
-            style="background-image: url('images/table_1.jpg')"
-          ></a>
-          <div class="text mt-3 float-right d-block">
-            <h3 class="heading">
-              <a href="#">University 🏓 Table Tennis Player</a>
-            </h3>
-            <p>
-              Table Tennis Tournament Success! Our team secured 3rd place at the
-              competitive RCU Single Zone Table Tennis Tournament. Facing strong
-              competition, we were incredibly proud of our performance. Thanks to
-              SSS Samiti Mahaveer Mirji College and RCU University for hosting.
-              #tabletennis #RCU #Belgaum
-            </p>
+          <!-- JPL Card -->
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="blog-entry justify-content-end">
+              <a
+                href="#"
+                class="block-20 zoom-effect"
+                style="background-image: url('images/JPL_final.jpg')"
+              ></a>
+              <div class="text mt-3 float-right d-block">
+                <h3 class="heading">
+                  <a href="#">🏆 Jain Premier League Champion (2024 & 2025)</a>
+                </h3>
+                <p>
+                  Champion of the highly competitive Jain Premier League,
+                  winning titles in both <strong>2024</strong> and
+                  <strong>2025</strong>. Demonstrated consistency, teamwork, and
+                  strong match performance throughout the tournaments,
+                  contributing significantly to overall team success and
+                  on-field strategy.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- JPL Card -->
-      <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
-          <a
-            href="#"
-            class="block-20 zoom-effect"
-            style="background-image: url('images/JPL_final.jpg')"  <!-- use your JPL image -->
-          ></a>
-          <div class="text mt-3 float-right d-block">
-            <h3 class="heading">
-              <a href="#">🏆 Jain Premier League Champion (2024 & 2025)</a>
-            </h3>
-            <p>
-              Champion of the highly competitive Jain Premier League, winning
-              titles in both <strong>2024</strong> and <strong>2025</strong>.
-              Demonstrated consistency, teamwork, and strong match performance
-              throughout the tournaments, contributing significantly to overall
-              team success and on-field strategy.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-  
+    </section>
 
     <!-- CONTACT SECTION -->
     <section
@@ -1404,8 +1595,7 @@
             ></a>
           </li>
           <li class="ftco-animate">
-            <a
-              href="https://www.facebook.com/shubham.suryavanshi.56481379/"
+            <a href="https://www.facebook.com/shubham.suryavanshi.56481379/"
               ><span class="icon-facebook"></span
             ></a>
           </li>
@@ -1426,7 +1616,6 @@
         <div class="row">
           <div class="col-md-12 text-center">
             <p>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
               Copyright &copy;
               <script>
                 document.write(new Date().getFullYear());
@@ -1434,7 +1623,6 @@
               All rights reserved | This template is made with
               <i class="icon-heart color-danger" aria-hidden="true"></i> by
               <a href="https://colorlib.com" target="_blank">Colorlib</a>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             </p>
           </div>
         </div>
